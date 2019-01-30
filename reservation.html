@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reservations</title>
+
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="jumbotron text-center">
+     <u><h1>Hot Restaurant</h1></u>
+      <h3>Reservations</h3>
+    </div>
+
+    <div class="panel panel-danger">
+
+      <div class="panel-heading">
+        <h3 class="panel-title">Make a reservation</h3>
+      </div>
+
+      <div class="panel-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="customerName">Name: </label>
+            <input class="form-control" type="text" id="customerName" name="customerName">
+          </div>
+          <div class="form-group">
+            <label for="customerPhone">Phone Number: </label>
+            <input class="form-control" type="text" id="customerPhone" name="customerPhone">
+          </div>
+          <div class="form-group">
+            <label for="customerEmail">Email: </label>
+            <input class="form-control" type="text" id="customerEmail" name="customerEmail">
+          </div>
+
+          <button class="btn btn-danger" id="submit">Submit</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $('#submit').on('click', function(event){
+        event.preventDefault();
+      
+      let newReservation = {
+        customerName: $('#customerName').val().trim(),
+        customerPhone: $('#customerPhone').val().trim(),
+        customerEmail: $('#customerEmail').val().trim(),
+      };
+
+      $.post('/api/tables', newReservation, function(data){
+        if (data == true) {
+          alert("Table booked!");
+          console.log("Table booked!");
+        }
+        if (data == false) {
+          alert("All tables are now booked. You are on the waiting list!");
+          console.log("You are on the List");
+        }
+        $('#customerName').val("");
+        $('#customerPhone').val("");
+        $('#cusomterEmail').val("");
+      });
+      return false;
+    });
+  </script>
+
+</body>
+</html>
