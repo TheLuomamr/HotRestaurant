@@ -23,10 +23,40 @@ app.listen(PORT, function() {
 
 var reservations = [
     {
-        id: "",
-        name: "",
-        phone: "",
-        email: ""
+        id: 1,
+        name: "test",
+        phone: 33333,
+        email: "email@.com"
+    },
+    {
+        id: 2,
+        name: "test",
+        phone: 33333,
+        email: "email@.com"
+    },
+    {
+        id: 3,
+        name: "test",
+        phone: 33333,
+        email: "email@.com"
+    },
+    {
+        id: 4,
+        name: "test",
+        phone: 33333,
+        email: "email@.com"
+    },
+    {
+        id: 5,
+        name: "test",
+        phone: 33333,
+        email: "email@.com"
+    },
+    {
+        id: 6,
+        name: "test",
+        phone: 33333,
+        email: "email@.com"
     }
 ]
 
@@ -65,7 +95,7 @@ app.get("/tables", function(req, res) {
     res.sendFile(path.join(__dirname, "tableView.html"));
 });
 
-app.get("/reserve", function(req, res) {
+app.get("/add", function(req, res) {
     res.sendFile(path.join(__dirname, "reservation.html"));
 });
 
@@ -75,14 +105,12 @@ app.get("/api/reservations", function(req, res) {
 });
 
 for(let index of reservations){
-
     if(index > 4){
         // Displays all waitlist
         app.get("/api/waitlist", function(req, res) {
         return res.json(reservations);
         });
-    }
-    
+    }    
 }
 
 

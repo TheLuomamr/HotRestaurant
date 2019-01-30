@@ -51,9 +51,9 @@
         event.preventDefault();
       
       let newReservation = {
-        customerName: $('#customerName').val().trim(),
-        customerPhone: $('#customerPhone').val().trim(),
-        customerEmail: $('#customerEmail').val().trim(),
+        name: $('#customerName').val().trim(),
+        phone: $('#customerPhone').val().trim(),
+        email: $('#customerEmail').val().trim(),
       };
 
       $.post('/api/tables', newReservation, function(data){
