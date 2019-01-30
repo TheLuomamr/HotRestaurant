@@ -62,18 +62,20 @@
 
   <script type="text/javascript">
     function runTableQuery() {
-      $.ajax({url: '/api/tables',
-        method: 'GET'})
-              .done(function(tableData){
-                for (var i = 0; i < tableData.length; i++) {
-                  let tableSection = $('<tr>').html(
-                          '<td>' + tableData[i].customerName + '</td>' +
-                          '<td>' + tableData[i].customerPhone + '</td>' +
-                          '<td>' + tableData[i].customerEmail + '</td>'
-                  );
-                  $('#tableSection').append(tableSection);
-                };
-              });
+      $.ajax({
+        url: '/api/reservations',
+        method: 'GET'
+      })
+        .done(function(tableData){
+          for (var i = 0; i < tableData.length; i++) {
+            let tableSection = $('<tr>').html(
+                    '<td>' + tableData[i].name + '</td>' +
+                    '<td>' + tableData[i].phone + '</td>' +
+                    '<td>' + tableData[i].email + '</td>'
+            );
+            $('#tableSection').append(tableSection);
+          };
+        });
     }
     function runWaitlistQuery() {
       $.ajax({url: '/api/waitlist',
@@ -81,9 +83,9 @@
               .done(function(waitlistData){
                 for (var i = 0; i < waitlistData.length; i++) {
                   let waitlistSection = $('<tr>').html(
-                          '<td>' + waitlistData[i].customerName + '</td>' +
-                          '<td>' + waitlistData[i].customerPhone + '</td>'+
-                          '<td>' + waitlistData[i].customerEmail + '</td>'
+                          '<td>' + waitlistData[i].name + '</td>' +
+                          '<td>' + waitlistData[i].phone + '</td>'+
+                          '<td>' + waitlistData[i].email + '</td>'
                   );
                   $('#waitlistSection').append(waitlistSection);
                 };
