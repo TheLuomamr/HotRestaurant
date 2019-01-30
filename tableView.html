@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tables</title>
+
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+  
+  <div class="container">
+
+    <div class="jumbotron text-center">
+      <u><h1>Hot Restaurant</h1></u>
+      <h3>Current Reservations & Wait List</h3>
+    </div>
+
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">Current Reservations</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+          </tr>
+          </thead>
+          <tbody id="tableSection">
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">Wait List</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+          </tr>
+          </thead>
+          <tbody id="waitlistSection">
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <script type="text/javascript">
+    function runTableQuery() {
+      $.ajax({url: '/api/tables',
+        method: 'GET'})
+              .done(function(tableData){
+                for (var i = 0; i < tableData.length; i++) {
+                  let tableSection = $('<tr>').html(
+                          '<td>' + tableData[i].customerName + '</td>' +
+                          '<td>' + tableData[i].customerPhone + '</td>' +
+                          '<td>' + tableData[i].customerEmail + '</td>'
+                  );
+                  $('#tableSection').append(tableSection);
+                };
+              });
+    }
+    function runWaitlistQuery() {
+      $.ajax({url: '/api/waitlist',
+                method: 'GET'})
+              .done(function(waitlistData){
+                for (var i = 0; i < waitlistData.length; i++) {
+                  let waitlistSection = $('<tr>').html(
+                          '<td>' + waitlistData[i].customerName + '</td>' +
+                          '<td>' + waitlistData[i].customerPhone + '</td>'+
+                          '<td>' + waitlistData[i].customerEmail + '</td>'
+                  );
+                  $('#waitlistSection').append(waitlistSection);
+                };
+              });
+    }
+    runTableQuery();
+    runWaitlistQuery();
+  </script>
+</body>
+</html>
